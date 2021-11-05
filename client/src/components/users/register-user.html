@@ -1,0 +1,120 @@
+<template>
+  <require from="../shared.css"></require>
+  <div class="">
+    
+    <div class="row">
+      
+      <div class=" col-sm-6" style="margin-top: 10%;">
+     <form role="form" validation-errors.bind="errors">
+          <div class="form-group row" validation-errors.bind="firstNameErrors"
+              class.bind="firstNameErrors.length ? 'has-error' : ''">
+            <label class="col-md-3 col-form-label" for="firstName">First Name</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" class.bind="firstNameErrors.length ? 'has-error' : ''" id="firstName" 
+                      value.bind="firstName & validate">
+              <span class="help-block" repeat.for="errorInfo of firstNameErrors">
+                ${errorInfo.error.message}
+              </span> 
+            </div>
+          </div>
+  
+          <div class="form-group row" validation-errors.bind="lastNameErrors"
+              class.bind="lastNameErrors.length ? 'has-error' : ''">
+            <label class="col-md-3 col-form-label" for="lastName">Last Name</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" class.bind="lastNameErrors.length ? 'has-error' : ''" id="lastName" 
+                      value.bind="lastName & validate">
+              <span class="help-block" repeat.for="errorInfo of lastNameErrors">
+                ${errorInfo.error.message}
+              </span> 
+            </div>
+          </div>
+  
+          <div class="form-group row" validation-errors.bind="emailErrors"
+              class.bind="emailErrors.length ? 'has-error' : ''">
+            <label class="col-md-3 col-form-label" for="email">Email</label>
+            <div class="col-md-9">
+              <input type="email" class="form-control" class.bind="emailErrors.length ? 'has-error' : ''" id="email" 
+                      value.bind="email & validate">
+              <span class="help-block" repeat.for="errorInfo of emailErrors">
+                ${errorInfo.error.message}
+              </span> 
+            </div>
+          </div>
+  
+          <div class="form-group row" validation-errors.bind="genderErrors"
+              class.bind="genderErrors.length ? 'has-error' : ''">
+            <label class="col-md-3 col-form-label" for="gender">Gender</label>
+            <div class="col-md-9">
+              <select id="role" class="form-control" class.bind="genderErrors.length ? 'has-error' : ''" value.bind="gender & validate">
+                <option selected></option>
+                <option>Male</option>
+                <option>Female</option>
+              </select> 
+              <span class="help-block" repeat.for="errorInfo of genderErrors">
+                ${errorInfo.error.message}
+              </span> 
+            </div>
+          </div>
+  
+          <div class="form-group row" validation-errors.bind="roleErrors"
+              class.bind="roleErrors.length ? 'has-error' : ''">
+            <label class="col-md-3 col-form-label" for="role">Role</label>
+            <div class="col-md-9">
+              <select id="role" class="form-control" class.bind="roleErrors.length ? 'has-error' : ''" value.bind="role & validate">
+                <option selected></option>
+                <option>USER</option>
+                <option>ADMIN</option>
+              </select>        
+              <span class="help-block" repeat.for="errorInfo of roleErrors">
+                ${errorInfo.error.message}
+              </span> 
+            </div>
+          </div>
+  
+        </form>
+        <div>
+          <button style="margin-left:50%;" class="btn btn-success float-right" click.delegate="create(firstName,lastName,email,gender,role)" disabled.bind="errors.length">Save</button>
+        
+          <button class="btn btn-primary float-right" click.delegate="reset()" disabled.bind="!firstName && !lastName && !email && !gender && !role">Reset</button>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <img
+        src="../user.jpg"
+        height=80%
+        alt=""
+        loading="lazy"
+      />
+       </div>
+    </div>
+    
+  </div>
+
+  <div class="mt-1">
+    <table class="table table-striped" aurelia-table="data.bind: userList; display-data.bind: $displayData">
+      <caption>Users</caption>
+        <thead>
+        <tr>
+            <th id="name">First Name</th>
+            <th id="lastName">Last Name</th>
+            <th id="gender">Gender</th>
+            <th id="email">Email</th>
+            <th id="role">Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr repeat.for="user of $displayData">
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.gender}</td>
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+
+  
+</template>
+

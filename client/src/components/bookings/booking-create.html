@@ -1,0 +1,74 @@
+<template>
+  <require from="../shared.css"></require>
+  <div class="row">
+      
+    <div class=" col-sm-6" style="margin-top: 10%;">
+      <form role="form" validation-errors.bind="errors">
+        <div class="form-group row" validation-errors.bind="emailErrors"
+            class.bind="emailErrors.length ? 'has-error' : ''">
+          <label class="col-md-3 col-form-label" for="email">Email</label>
+          <div class="col-md-9">
+            <input type="email" class="form-control" class.bind="emailErrors.length ? 'has-error' : ''" id="email" 
+                    value.bind="email & validate">
+            <span class="help-block" repeat.for="errorInfo of emailErrors">
+              ${errorInfo.error.message}
+            </span> 
+          </div>
+        </div>
+
+        <div class="form-group row" validation-errors.bind="locationIdErrors"
+            class.bind="locationIdErrors.length ? 'has-error' : ''">
+          <label class="col-md-3 col-form-label" for="locationId">Location ID</label>
+          <div class="col-md-9">
+            <input type="number" class="form-control" class.bind="locationIdErrors.length ? 'has-error' : ''" id="locationId"
+                    value.bind="locationId & validate">
+            <span class="help-block" repeat.for="errorInfo of locationIdErrors">
+              ${errorInfo.error.message}
+            </span> 
+          </div>
+        </div>
+
+        <div class="form-group row" validation-errors.bind="testTypeErrors"
+            class.bind="testTypeErrors.length ? 'has-error' : ''">
+          <label class="col-md-3 col-form-label" for="testType">Test Type</label>
+          <div class="col-md-9">
+            <select id="testType" class="form-control" class.bind="testTypeErrors.length ? 'has-error' : ''" value.bind="testType & validate">
+              <option selected></option>
+              <option>PCR</option>
+              <option>Rapid Test</option>
+            </select>        
+            <span class="help-block" repeat.for="errorInfo of testTypeErrors">
+              ${errorInfo.error.message}
+            </span> 
+          </div>
+        </div>
+
+        <div class="form-group row" validation-errors.bind="testDateErrors"
+            class.bind="testDateErrors.length ? 'has-error' : ''">
+          <label class="col-md-3 col-form-label" for="testDate">Test Date</label>
+          <div class="col-md-9">
+            <input type="date" class="form-control" class.bind="testDateErrors.length ? 'has-error' : ''" id="testDate"
+                    value.bind="testDate & validate">
+            <span class="help-block" repeat.for="errorInfo of testDateErrors">
+              ${errorInfo.error.message}
+            </span> 
+          </div>
+        </div>
+
+      </form>
+      <div>
+        <button style="margin-left:50%;"  class="btn btn-success float-right" click.delegate="create(email,locationId,testType,testDate)" disabled.bind="errors.length">Save</button>
+        <button class="btn btn-primary float-right" click.delegate="reset()" disabled.bind="!email && !locationId && !testType && !testDate">Reset</button>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <img
+      src="../booking.png"
+      height=100%
+      alt=""
+      loading="lazy"
+    />
+     </div>
+  </div>
+</template>
+
