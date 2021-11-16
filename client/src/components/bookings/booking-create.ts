@@ -65,7 +65,7 @@ export class BookingDetail {
           setTimeout(function(){window.location.replace("bookingList/")}, 1000);
         });
       } else {
-        console.log('E no enter');
+        console.log('failed');
         
       }
     });

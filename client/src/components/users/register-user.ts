@@ -62,7 +62,7 @@ export class UserDetail {
           window.location.reload();
         });
       } else {
-        console.log('E no enter');
+        console.log('Failed');
         
       }
     });
